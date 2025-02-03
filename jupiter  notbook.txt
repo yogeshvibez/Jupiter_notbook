@@ -9,5 +9,12 @@ How to run Jupiter Notbook on Google Colab to run rdp 12 hour
 !tar -xvf ngrok-v3-stable-linux-amd64.tgz
 
 !./ngrok authtoken 2qsVxZmAfcAghejKrSF5wmj32cd_7LatHKHkFoE7WY56q5wY4
+------
+This command Host website on ngrok
 
 !./ngrok http 8888 & python3 -m notebook --allow-root
+
+--------
+this command host website on ssh free 
+
+ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -R 80:localhost:8888 localhost.run & python3 -m notebook --allow-root
