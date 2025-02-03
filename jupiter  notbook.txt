@@ -18,3 +18,9 @@ This command Host website on ngrok
 this command host website on ssh free 
 
 ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -R 80:localhost:8888 localhost.run & python3 -m notebook --allow-root
+---------
+
+this code host your website on python 
+
+python3 -m http.server 8888 & python3 -m notebook --allow-root
+
