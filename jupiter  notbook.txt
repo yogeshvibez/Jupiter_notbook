@@ -8,7 +8,7 @@ How to run Jupiter Notbook on Google Colab to run rdp 12 hour
 
 !tar -xvf ngrok-v3-stable-linux-amd64.tgz
 
-!./ngrok authtoken 2qsVxZmAfcAghejKrSF5wmj32cd_7LatHKHkFoE7WY56q5wY4
+!./ngrok authtoken 2uno3RP2oA1Z3ZoyG5IbkwjndFW_6eK7kWWhGR97kdxH35wZy
 ------
 This command Host website on ngrok
 
