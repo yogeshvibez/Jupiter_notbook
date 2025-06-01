@@ -24,3 +24,8 @@ this code host your website on python
 
 python3 -m http.server 8888 & python3 -m notebook --allow-root
 
+cloudflare expose
+
+!nohup python3 -m http.server 8888 & nohup python3 -m notebook --allow-root & cloudflared tunnel run --token eyJhIjoiYzRhMTcwZmEzZGViOWRkNTRmNmQ1NTdkMmVlNjg2MTAiLCJ0IjoiYjBjYWExNjUtNGUzZS00ZjFiLWFhNzItZWExOTVlYjFmZmI0IiwicyI6Ik5qaGhOR1JpT1RRdFpEaGpZaTAwTm1VM0xXSmpPREl0T0dSaU0yTXlPR1UwWm1NNSJ9
+
+
