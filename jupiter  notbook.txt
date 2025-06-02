@@ -24,10 +24,15 @@ this code host your website on python
 
 python3 -m http.server 8888 & python3 -m notebook --allow-root
 
-!python3 -m pip install notebook
-!wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
-!tar -xvf ngrok-v3-stable-linux-amd64.tgz
-!./ngrok authtoken 2xvEznlZAaTq1tsfVNDEUzOL5Fy_4LeN62UZejWtJNr4xXpW8
-!./ngrok http 8888 & python3 -m notebook --allow-root
+----------
 
+cloud flare expose 
+
+!python3 -m pip install notebook
+!nohup jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --NotebookApp.token='' --NotebookApp.password='' > jupyter.log 2>&1 &
+!sudo ufw allow 8888
+!wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+!sudo dpkg -i cloudflared-linux-amd64.deb
+!cloudflared tunnel run --token eyJhIjoiYzRhMTcwZmEzZGViOWRkNTRmNmQ1NTdkMmVlNjg2MTAiLCJ0IjoiY2UxMjJmNmUtMTI0OS00Yjk5LTllNDUtNTM2ODhmYzFlYjVmIiwicyI6Ik56Rm1aRGc0TXpRdFlUTmhPQzAwWW1OaExUZzBORFl0WldFM01UTmlORGRrTldOaiJ9
+------------
 
