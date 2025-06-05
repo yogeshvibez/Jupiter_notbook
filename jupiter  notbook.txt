@@ -1,38 +1,29 @@
-How to run Jupiter Notbook on Google Colab to run rdp 12 hour
+# RUN JUPITER ON YOUR COLAB FREE
+# ================================
 
-==========
-
+# INSTALL JUPITER IN COLAB
 !python3 -m pip install notebook
 
-!wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
+# ADD CLOUDFLARE GPG KEY
+sudo mkdir -p --mode=0755 /usr/share/keyrings
+curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
 
-!tar -xvf ngrok-v3-stable-linux-amd64.tgz
+# ADD THIS REPO TO YOUR APT REPOSITORIES
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
 
-!./ngrok authtoken 2xvEznlZAaTq1tsfVNDEUzOL5Fy_4LeN62UZejWtJNr4xXpW8
-------
-This command Host website on ngrok
+# INSTALL CLOUDFLARE
+sudo apt-get update && sudo apt-get install cloudflared
 
-!./ngrok http 8888 & python3 -m notebook --allow-root
-
---------
-this command host website on ssh free 
-
-ssh -i ~/.ssh/id_rsa.pub -o StrictHostKeyChecking=no -R 80:localhost:8501 localhost.run & python3 -m notebook --allow-root
----------
-
-this code host your website on python 
-
-python3 -m http.server 8888 & python3 -m notebook --allow-root
-
-----------
-
-cloud flare expose 
-
-!python3 -m pip install notebook
+# RUN JUPITER IN YOUR COLAB
 !nohup jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --NotebookApp.token='' --NotebookApp.password='' > jupyter.log 2>&1 &
+
 !sudo ufw allow 8888
-!wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
-!sudo dpkg -i cloudflared-linux-amd64.deb
+
+# RUN CLOUDFLARE TO EXPOSE YOUR JUPITER
 !cloudflared tunnel run --token eyJhIjoiYzRhMTcwZmEzZGViOWRkNTRmNmQ1NTdkMmVlNjg2MTAiLCJ0IjoiY2UxMjJmNmUtMTI0OS00Yjk5LTllNDUtNTM2ODhmYzFlYjVmIiwicyI6Ik56Rm1aRGc0TXpRdFlUTmhPQzAwWW1OaExUZzBORFl0WldFM01UTmlORGRrTldOaiJ9
-------------
+
+
+
+# JUST COPY AND RUN THIS COMMAND. MAKE SURE YOU ADD YOUR OWN CLOUD FLARE TOKEN AND DOMAIN THIS IS MY PERSONAL TOKEN
+
 
