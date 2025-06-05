@@ -1,0 +1,16 @@
+# TO RUN VS CODE ON YOUR COLAB 
+# ==============================
+
+
+# INSTALL VSCODE DEB FILE
+!wget "https://github.com/coder/code-server/releases/download/v4.100.3/code-server_4.100.3_amd64.deb"
+
+
+# INSTALL DEB FILE IN YOUR COLAB
+!sudo dpkg -i code-server_4.100.3_amd64.deb
+
+
+# RUN CODE-SERVER IN YOUR COLAB 
+!nohup code-server --auth=none . > code-server.log 2>&1 &
+
+
