@@ -10,7 +10,22 @@
 !sudo dpkg -i code-server_4.100.3_amd64.deb
 
 
+# ADD CLOUDFLARE GPG KEY
+sudo mkdir -p --mode=0755 /usr/share/keyrings
+curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
+
+# ADD THIS REPO TO YOUR APT REPOSITORIES
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+
+# INSTALL CLOUDFLARE
+sudo apt-get update && sudo apt-get install cloudflared
+
 # RUN CODE-SERVER IN YOUR COLAB 
 !nohup code-server --auth=none . > code-server.log 2>&1 &
+
+!sudo ufw allow 8888
+
+# RUN CLOUDFLARE TO EXPOSE YOUR JUPITER
+!cloudflared tunnel run --token eyJhIjoiYzRhMTcwZmEzZGViOWRkNTRmNmQ1NTdkMmVlNjg2MTAiLCJ0IjoiY2UxMjJmNmUtMTI0OS00Yjk5LTllNDUtNTM2ODhmYzFlYjVmIiwicyI6Ik56Rm1aRGc0TXpRdFlUTmhPQzAwWW1OaExUZzBORFl0WldFM01UTmlORGRrTldOaiJ9
 
 
