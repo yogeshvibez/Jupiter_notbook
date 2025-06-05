@@ -1,33 +1,25 @@
-# TO RUN VS CODE ON YOUR COLAB 
-# ==============================
+# ================================
+# 🚀 VS CODE ON GOOGLE COLAB + CLOUDFLARE TUNNEL
+# ================================
 
+# STEP 1: Install code-server (VS Code)
+!wget -q "https://github.com/coder/code-server/releases/download/v4.100.3/code-server_4.100.3_amd64.deb"
+!sudo apt-get install -y ./code-server_4.100.3_amd64.deb
 
-# INSTALL VSCODE DEB FILE
-!wget "https://github.com/coder/code-server/releases/download/v4.100.3/code-server_4.100.3_amd64.deb"
+# STEP 2: Disable authentication for code-server
+!mkdir -p ~/.config/code-server
+!echo -e "bind-addr: 0.0.0.0:8888\nauth: none\ncert: false" > ~/.config/code-server/config.yaml
 
-
-# INSTALL DEB FILE IN YOUR COLAB
-!sudo dpkg -i code-server_4.100.3_amd64.deb
-
-
-# ADD CLOUDFLARE GPG KEY
+# STEP 3: Install Cloudflared
+!sudo apt-get update -y
+!sudo apt-get install -y curl gnupg
 !sudo mkdir -p --mode=0755 /usr/share/keyrings
-!curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
+!curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg > /dev/null
+!echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+!sudo apt-get update && sudo apt-get install -y cloudflared
 
-# ADD THIS REPO TO YOUR APT REPOSITORIES
-!echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main' | !sudo tee /etc/apt/sources.list.d/cloudflared.list
+# STEP 4: Start code-server in background
+!nohup code-server > code-server.log 2>&1 &
 
-# INSTALL CLOUDFLARE
-!sudo apt-get update && sudo apt-get install cloudflared
-
-# RUN CODE-SERVER IN YOUR COLAB 
-!nohup code-server --auth=none . > code-server.log 2>&1 &
-
-!sudo ufw allow 8888
-
-# RUN CLOUDFLARE TO EXPOSE YOUR JUPITER
+# STEP 5: Run Cloudflare tunnel with your token 🚨
 !cloudflared tunnel run --token eyJhIjoiYzRhMTcwZmEzZGViOWRkNTRmNmQ1NTdkMmVlNjg2MTAiLCJ0IjoiY2UxMjJmNmUtMTI0OS00Yjk5LTllNDUtNTM2ODhmYzFlYjVmIiwicyI6Ik56Rm1aRGc0TXpRdFlUTmhPQzAwWW1OaExUZzBORFl0WldFM01UTmlORGRrTldOaiJ9
-
-
-# JUST COPY AND RUN THIS COMMAND. MAKE SURE YOU ADD YOUR OWN CLOUD FLARE TOKEN AND DOMAIN THIS IS MY PERSONAL TOKEN.
-# AND YOU CAN USE NGROK OR ANOTHER PORT TUNNELING TOOLS TO EXPOSE YOUR IDE
