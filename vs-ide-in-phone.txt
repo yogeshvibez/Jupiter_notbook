@@ -28,5 +28,5 @@ sudo apt update && sudo apt install -y cloudflared
 nohup code-server > ~/code-server.log 2>&1 &
 
 # RUN CLOUD FLARE TO EXPOSE YOUR VS-CODE SERVER
-nohup cloudflared tunnel run --token eyJhIjoiYzRhMTcwZmEzZGViOWRkNTRmNmQ1NTdkMmVlNjg2MTAiLCJ0IjoiY2UxMjJmNmUtMTI0OS00Yjk5LTllNDUtNTM2ODhmYzFlYjVmIiwicyI6Ik56Rm1aRGc0TXpRdFlUTmhPQzAwWW1OaExUZzBORFl0WldFM01UTmlORGRrTldOaiJ9 > ~/cloudflared.log 2>&1 &
+cloudflared tunnel run --token eyJhIjoiYzRhMTcwZmEzZGViOWRkNTRmNmQ1NTdkMmVlNjg2MTAiLCJ0IjoiY2UxMjJmNmUtMTI0OS00Yjk5LTllNDUtNTM2ODhmYzFlYjVmIiwicyI6Ik56Rm1aRGc0TXpRdFlUTmhPQzAwWW1OaExUZzBORFl0WldFM01UTmlORGRrTldOaiJ9
 
